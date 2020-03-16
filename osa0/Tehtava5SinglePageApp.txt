@@ -1,0 +1,30 @@
+﻿title Single Page App
+
+
+Selain->Palvelin: HTTP GET /spa
+Palvelin-->Selain: HTTP 200 OK HTML-koodi
+note left of Selain
+    HTML-koodi sisältää viitteen
+    tyylit määrittelevään tiedostoon
+    joten selain hakee sen
+end note
+Selain->Palvelin: HTTP GET /main.css
+Palvelin-->Selain: HTTP 200 OK main.css
+note left of Selain
+    HTML-koodi sisältää viitteen
+    JavaScript tiedostoon
+    joten selain hakee sen
+end note
+Selain->Palvelin: HTTP GET /main.js
+Palvelin-->Selain: HTTP 200 OK main.js
+note left of Selain
+    Selain alkaa suorittaa js-koodia
+    joka pyytää JSON-datan palvelimelta
+end note
+Selain->Palvelin: HTTP GET /data.json
+Palvelin-->Selain: HTTP 200 OK data.json
+
+
+
+
+

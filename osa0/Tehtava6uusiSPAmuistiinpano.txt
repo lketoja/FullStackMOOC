@@ -1,0 +1,17 @@
+﻿title Uusi SPA muistiinpano
+
+note left of Selain 
+    Käyttäjä lisää uuden muistiinpanon 
+    ja painaa tallenna
+end note
+Selain->Palvelin: HTTP POST /new_note_spa
+note right of Palvelin
+    Palvelin tallentaa muistiinpanon
+    ja lähettää vastauksen
+end note
+Palvelin-->Selain: HTTP 201 Created
+
+
+
+
+

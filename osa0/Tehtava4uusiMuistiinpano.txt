@@ -1,0 +1,43 @@
+﻿title Uuden muistiinpanon luominen
+
+note left of Selain 
+    Käyttäjä lisää uuden muistiinpanon 
+    ja painaa tallenna
+end note
+Selain->Palvelin: HTTP POST /new_note
+note right of Palvelin
+    Palvelin tallentaa muistiinpanon
+    ja lähettää uudelleenohjauspyynnön
+end note
+Palvelin-->Selain: HTTP 302 Found Location: /notes
+note left of Selain
+    Selain tekee automaattisesti uuden 
+    pyynnön palvelimelta saatuun osoitteeseen
+end note
+Selain->Palvelin: HTTP GET /notes
+Palvelin-->Selain: HTML-koodi
+note left of Selain
+    HTML-koodi sisältää viitteen
+    tyylit määrittelevään tiedostoon
+    joten selain hakee sen
+end note
+Selain->Palvelin: HTTP GET /main.css
+Palvelin-->Selain: main.css
+note left of Selain
+    HTML-koodi sisältää viitteen
+    JavaScript tiedostoon
+    joten selain hakee sen
+end note
+Selain->Palvelin: HTTP GET /main.js
+Palvelin-->Selain: main.js
+note left of Selain
+    Selain alkaa suorittaa js-koodia
+    joka pyytää JSON-datan palvelimelta
+end note
+Selain->Palvelin: HTTP GET /data.json
+Palvelin-->Selain: data.json
+
+
+
+
+
