@@ -16,19 +16,19 @@
       "id": 3
     },
     {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": 4
-    },
-    {
       "name": "Lotta Ketoja",
-      "number": "044-3456778",
+      "number": "11111",
       "id": 5
     },
     {
       "name": "Erkki Esimerkki",
       "number": "050-1234567",
       "id": 6
+    },
+    {
+      "name": "Nalle Puh",
+      "number": "",
+      "id": 7
     }
   ]
 }

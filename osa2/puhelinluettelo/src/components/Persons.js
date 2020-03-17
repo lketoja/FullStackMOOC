@@ -10,7 +10,7 @@ const Persons = ({persons, filterText, handleDeleteOf}) =>
       <p key={person.name}>
         {person.name} 
         {person.number}
-        <button onClick={() => handleDeleteOf(person.name)}>delete</button>
+        <button onClick={() => handleDeleteOf(person.id)}>delete</button>
       </p>
     )
 

@@ -11,37 +11,50 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filterText, setFilterText] = useState('')
 
+  const baseUrl = "http://localhost:3001/persons"
+
   const hook = () => {
     axios
-      .get("http://localhost:3001/persons")
+      .get(baseUrl)
       .then(result => setPersons(result.data))
   }
 
   useEffect(hook, [])
 
-  const addName = (event) => {
+  const addPerson = (event) => {
     event.preventDefault()
-
-    const newPerson = {name: newName, number: newNumber}
-  
-    if(persons.find((person) => person.name === newName)){
-      alert(`${newName} is already added to phonebook`)
+    const personToBeChanged = persons.find(person => person.name.toLowerCase() === newName.toLowerCase())   
+    if(personToBeChanged){
+      if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
+        const changedPerson = {...personToBeChanged, number: newNumber}
+        axios.put(baseUrl + `/${personToBeChanged.id}`, changedPerson)
+          .then(response => {
+            console.log(response)
+            setPersons(persons.map(person => person.id !== personToBeChanged.id ? person : response.data))
+          }) 
+      }
       setNewName('')
       setNewNumber('')
     } else {
+      const newPerson = {name: newName, number: newNumber}
       axios
-        .post("http://localhost:3001/persons", newPerson)
+        .post(baseUrl, newPerson)
         .then(response => {
           setPersons(persons.concat(response.data))
           setNewName('')
           setNewNumber('')
-        })
-     
+        }) 
     }
   }
 
-  const deleteName = name => console.log(`delete ${name}`)
-
+  const deletePersonById = id => {
+    console.log(`delete person with id ${id}`)
+    const personToDelete = persons.find(person => person.id === id)
+    if(window.confirm(`Do you wan't to delete ${personToDelete.name}`)){
+      axios.delete(baseUrl + `/${id}`)
+      setPersons(persons.filter(person => person.id !== id))
+    }
+  }
   
   const handleNameChange = (event) => {
     setNewName(event.target.value)
@@ -64,7 +77,7 @@ const App = () => {
       />
       <h2>Add a new</h2>
       <PersonForm 
-        addName={addName}
+        addName={addPerson}
         handleNameChange={handleNameChange}
         newName={newName}
         handleNumberChange={handleNumberChange}
@@ -74,7 +87,7 @@ const App = () => {
       <Persons 
         persons={persons} 
         filterText={filterText} 
-        handleDeleteOf={deleteName}
+        handleDeleteOf={deletePersonById}
       />
     </div>
   )
