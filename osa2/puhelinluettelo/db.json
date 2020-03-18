@@ -1,24 +1,9 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
-    {
       "name": "Ada Lovelace",
       "number": "39-44-5323523",
       "id": 2
-    },
-    {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
-      "id": 3
-    },
-    {
-      "name": "Lotta Ketoja",
-      "number": "11111",
-      "id": 5
     },
     {
       "name": "Erkki Esimerkki",
@@ -26,9 +11,29 @@
       "id": 6
     },
     {
-      "name": "Nalle Puh",
-      "number": "",
-      "id": 7
+      "name": "nasu",
+      "number": "41414141",
+      "id": 8
+    },
+    {
+      "name": "ihaa",
+      "number": "0909090",
+      "id": 9
+    },
+    {
+      "name": "Ruu",
+      "number": "76767676",
+      "id": 10
+    },
+    {
+      "name": "Kengu",
+      "number": "87878787",
+      "id": 11
+    },
+    {
+      "name": "Pöllö",
+      "number": "91919191",
+      "id": 12
     }
   ]
 }

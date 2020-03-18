@@ -8,8 +8,7 @@ const Persons = ({persons, filterText, handleDeleteOf}) =>
     )
     .map(person => 
       <p key={person.name}>
-        {person.name} 
-        {person.number}
+        {person.name}: {person.number}
         <button onClick={() => handleDeleteOf(person.id)}>delete</button>
       </p>
     )
