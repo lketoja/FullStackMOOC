@@ -1,11 +1,12 @@
 import React from 'react'
 
-const SuccessNotification = ({message}) => {
+const Notification = ({message}, {colour}) => {
     if(message === null){
         return null
     }
+    console.log(colour)
     const successStyle = {
-        color: 'red',
+        color: colour,
         background: 'lightgrey',
         fontSize: 20,
         borderStyle: 'solid',
@@ -20,4 +21,4 @@ const SuccessNotification = ({message}) => {
     )
 }
 
-export default SuccessNotification
+export default Notification

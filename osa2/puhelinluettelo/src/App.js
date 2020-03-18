@@ -2,10 +2,8 @@ import React, {useState, useEffect} from 'react';
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
-import SuccessNotification from './components/SuccessNotification'
-import ErrorNotification from './components/ErrorNotification'
-import axios from 'axios'
-
+import Notification from './components/Notification'
+import personService from './services/person'
 
 const App = () => {
   const [ persons, setPersons] = useState([])
@@ -15,12 +13,10 @@ const App = () => {
   const [successMessage, setSuccessMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null) 
 
-  const baseUrl = "http://localhost:3001/persons"
-
   const hook = () => {
-    axios
-      .get(baseUrl)
-      .then(result => setPersons(result.data))
+    personService
+      .getAll()
+      .then(people => setPersons(people))
   }
 
   useEffect(hook, [])
@@ -44,12 +40,14 @@ const App = () => {
   const replaceTheOldNumber = personToBeChanged => {
     if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
       const changedPerson = {...personToBeChanged, number: newNumber}
-      axios.put(baseUrl + `/${personToBeChanged.id}`, changedPerson)
-        .then(response => {
-          console.log(response)
-          setPersons(persons.map(person => person.id !== personToBeChanged.id ? person : response.data))
+      personService
+        .update(personToBeChanged.id, changedPerson)
+        .then(updatedPerson => {
+          console.log(updatedPerson)
+          setPersons(persons.map(person => person.id !== personToBeChanged.id ? person : updatedPerson))
         })
         .catch(error => {
+          console.log(error)
           setErrorMessage(`Information of ${newName} has already been removed from server`)
           setTimeout(() => {
             setErrorMessage(null)
@@ -62,10 +60,10 @@ const App = () => {
 
   const addNewPerson = () => {
     const newPerson = {name: newName, number: newNumber}
-      axios
-        .post(baseUrl, newPerson)
-        .then(response => {
-          setPersons(persons.concat(response.data))
+      personService
+        .create(newPerson)              
+        .then(person => {
+          setPersons(persons.concat(person))
           setNewName('')
           setNewNumber('')
           setSuccessMessage(`Added ${newName}`)
@@ -79,16 +77,19 @@ const App = () => {
     console.log(`delete person with id ${id}`)
     const personToDelete = persons.find(person => person.id === id)
     if(window.confirm(`Do you wan't to delete ${personToDelete.name}`)){
-      axios.delete(baseUrl + `/${id}`)
-      setPersons(persons.filter(person => person.id !== id))
+      personService
+        .remove(id)
+        .then(response => {
+          setPersons(persons.filter(person => person.id !== id))
+        })
     }
   }
   
   return (
     <div>
       <h2>Phonebook</h2>
-      <SuccessNotification message={successMessage} />
-      <ErrorNotification message={errorMessage} />
+      <Notification message={successMessage} colour="green" />
+      <Notification message={errorMessage} colour="red"/>
       <Filter 
         handleFilterChange={handleFilterChange} 
         filterText={filterText}

@@ -11,18 +11,13 @@
       "id": 6
     },
     {
-      "name": "nasu",
-      "number": "41414141",
-      "id": 8
-    },
-    {
       "name": "ihaa",
-      "number": "0909090",
+      "number": "1111",
       "id": 9
     },
     {
       "name": "Ruu",
-      "number": "76767676",
+      "number": "0000",
       "id": 10
     },
     {
@@ -34,6 +29,16 @@
       "name": "Pöllö",
       "number": "91919191",
       "id": 12
+    },
+    {
+      "name": "nalle puh",
+      "number": "23232323",
+      "id": 13
+    },
+    {
+      "name": "lotta",
+      "number": "1234",
+      "id": 14
     }
   ]
 }
