@@ -11,7 +11,8 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filterText, setFilterText] = useState('')
   const [successMessage, setSuccessMessage] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null) 
+  const [errorMessageUpdate, setErrorMessageUpdate] = useState(null)
+  const [errorMessageCreate, setErrorMessageCreate] = useState(null) 
 
   const hook = () => {
     personService
@@ -48,9 +49,9 @@ const App = () => {
         })
         .catch(error => {
           console.log(error)
-          setErrorMessage(`Information of ${newName} has already been removed from server`)
+          setErrorMessageUpdate(`Information of ${newName} has already been removed from server`)
           setTimeout(() => {
-            setErrorMessage(null)
+            setErrorMessageUpdate(null)
           }, 3000)
         }) 
     }
@@ -69,6 +70,13 @@ const App = () => {
           setSuccessMessage(`Added ${newName}`)
           setTimeout(() => {
             setSuccessMessage(null)
+          }, 3000)
+        })
+        .catch(error => {
+          console.log(error.response.data.error)
+          setErrorMessageCreate(`${error.response.data.error}`)
+          setTimeout(() => {
+            setErrorMessageCreate(null)
           }, 3000)
         }) 
   }
@@ -89,7 +97,8 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Notification message={successMessage} colour="green" />
-      <Notification message={errorMessage} colour="red"/>
+      <Notification message={errorMessageUpdate} colour="red"/>
+      <Notification message={errorMessageCreate} colour="red"/>
       <Filter 
         handleFilterChange={handleFilterChange} 
         filterText={filterText}

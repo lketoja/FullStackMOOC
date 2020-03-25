@@ -5,7 +5,7 @@ const Notification = ({message, colour}) => {
         return null
     }
     console.log(colour)
-    const successStyle = {
+    const notificationStyle = {
         color: colour,
         background: 'lightgrey',
         fontSize: 20,
@@ -15,7 +15,7 @@ const Notification = ({message, colour}) => {
         marginBottom: 15
     }
     return(
-        <div style={successStyle}>
+        <div style={notificationStyle}>
             {message}
         </div>
     )
